@@ -52,7 +52,11 @@ defmodule RecipeParser do
 
       title_string = Meeseeks.text(title)
 
-      file_title = title_string |> String.downcase() |> String.replace(" ", "_")
+      file_title =
+        title_string
+        |> String.downcase()
+        |> String.replace(~r/\s|\(|\)|\//, "_")
+        |> String.replace(~r/'|"|”|“|\,|’/, "")
 
       IO.puts("Writing #{file_title}")
 
